@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script lang="java">
+        $(function(){
+            var n=0;
+
+            $(".list li").click(function(){
+                var title=$(this).children().attr("alt");
+                // $(this).children().attr("title", "배");
+                console.log("title:", title);
+
+                $(".wall h1").text(title);
+                // var txt=$(".wall h1").text();
+                // console.log("txt:", txt);
+
+                var src=$(this).children().attr("src");
+                console.log("src:", src);
+
+                $(".wall").css({"background-image": "url("+src+")"});
+                // src는 변수를 지정했기 때문에 따옴표안에 들어가면 
+                //문자의 형태로 인식됨
+                // "url(" 와 ")" 를 인식, 그 사이에 +로 변수를 넣어야 함 
+
+                $(".list li").removeClass("on");
+                $(this).addClass("on");
+
+                n=$(this).index()
+                console.log("n:", n);
+            })//
+
+
+
+            $(".left").click(function(){
+                if(n==0){
+                    n=5
+                }else{
+                    n--;
+                }
+
+                $(".list li").eq(n).click();
+            })//left
+
+            $(".right").click(function(){
+                if(n==5){
+                    n=0
+                }else{
+                    n++;
+                }
+
+                $(".list li").eq(n).click();
+            })//right
+
+        })//
+    </script>
+</head>
+<body>
+    <div class="wall">
+
+        <h1>Papers</h1>
+        <img src="images/cover.png" alt="cover">
+        <ul class="list">
+            <li class="on"><img src="images/b01.png" alt="Pear" title="Pear"></li>
+            <li><img src="images/b02.png" alt="Checker" title="Checker"></li>
+            <li><img src="images/b03.png" alt="Bamboo" title="Bamboo"></li>
+            <li><img src="images/b04.png" alt="School" title="School"></li>
+            <li><img src="images/b05.png" alt="Leaf" title="Leaf"></li>
+            <li><img src="images/b06.png" alt="Forest" title="Forest"></li>
+        </ul><!-- list -->
+
+        <div class="control">
+            <a href="#" class="left">left</a>
+            <a href="#" class="right">right</a>
+        </div><!-- control -->
+    </div><!-- wall -->
+</body>
+</html>
